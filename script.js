@@ -33,8 +33,6 @@ fs.readFile(path.resolve(inputPath), "utf8", (err, data) => {
 
     let current = section.nextElementSibling;
     while (current && !current.classList.contains("sectionHeading")) {
-      // console.debug("current text content:", current.textContent);
-      console.debug("current classList:", current.classList);
       if (
         current.classList.contains("noteHeading") &&
         current.textContent.toLowerCase().includes("highlight")
@@ -50,10 +48,6 @@ fs.readFile(path.resolve(inputPath), "utf8", (err, data) => {
           : "";
 
         const pageOrLocation = current.textContent.split(" - ")[1].trim();
-        console.debug(pageOrLocation);
-
-        console.debug("noteText:", noteText);
-
         markdown += `- ${noteText} - ${pageOrLocation}\n\n`;
       }
       current = current.nextElementSibling;
@@ -65,7 +59,7 @@ fs.readFile(path.resolve(inputPath), "utf8", (err, data) => {
   // Write to Markdown file
   const outputPath = path.join(
     process.cwd(),
-    `${bookTitle.replace(/\s+/g, "_")}.md`,
+    `${bookTitle.toLowerCase().replace(/\s+/g, "-")}.md`,
   );
   fs.writeFile(outputPath, markdown, (err) => {
     if (err) {
