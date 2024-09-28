@@ -48,7 +48,7 @@ fs.readFile(path.resolve(inputPath), "utf8", (err, data) => {
           : "";
 
         const pageOrLocation = current.textContent.split(" - ")[1].trim();
-        markdown += `- ${noteText} - ${pageOrLocation}\n\n`;
+        markdown += `> ${noteText}\n>\n>**${pageOrLocation}**\n\n`;
       }
       current = current.nextElementSibling;
     }
